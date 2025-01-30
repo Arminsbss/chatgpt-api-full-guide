@@ -1,7 +1,5 @@
 Below is a step-by-step guide to understand how this kind of ChatGPT-like application is set up and how the code works. The sample you provided has repeated blocks of identical code, so let’s just break it down once. I’ll also give you some general best practices and notes along the way.
 
----
-
 ## 1. Installing and Importing the OpenAI Library
 
 **Officially**, you use the OpenAI Python library with:
@@ -36,8 +34,6 @@ response = openai.ChatCompletion.create(
 
 So if you’re following the official documentation, keep in mind the code might look slightly different. But let’s treat your snippet as a custom or alternate library usage that wraps the official OpenAI calls.
 
----
-
 ## 2. Storing and Using Your API Key
 
 - You need your OpenAI API key (it looks like `sk-...`).
@@ -53,8 +49,6 @@ So if you’re following the official documentation, keep in mind the code might
   api_key = os.environ["OPENAI_API_KEY"]
   client = OpenAI(api_key=api_key)
   ```
-
----
 
 ## 3. Conversation History Management
 
@@ -74,8 +68,6 @@ conversation_history.append({"role": "user", "content": user_input})
 ```
 
 Then it sends the entire `conversation_history` list to the model. This way, the model can keep track of the conversation’s context. When the model returns a response, it gets appended as an **assistant** message.
-
----
 
 ## 4. Making a Chat Completion Request
 
@@ -100,8 +92,6 @@ assistant_message = completion.choices[0].message.content
 ```
 is how you extract the text.
 
----
-
 ## 5. Returning the Assistant’s Response
 
 ```python
@@ -110,8 +100,6 @@ return assistant_message
 ```
 - This line **stores** the assistant’s response in `conversation_history` so it can be sent back to the model if the user continues chatting.
 - Then it **returns** the assistant’s message so your application can display or process it.
-
----
 
 ## 6. Main Loop for a Chat-Like Interface
 
@@ -132,8 +120,6 @@ while True:
 - Otherwise, it calls `chat_with_api(user_input)`, which returns the AI’s response, and then prints it.
 
 This is a simple interactive console chat. In real applications, you might implement a GUI, a web-based interface, or an API endpoint.
-
----
 
 ## 7. General Best Practices
 
@@ -158,8 +144,6 @@ This is a simple interactive console chat. In real applications, you might imple
 6. **Error Handling**: 
    - In production, handle exceptions such as `openai.error.RateLimitError` or `openai.error.APIConnectionError`.
 
----
-
 ## 8. Summary of the Code Flow
 
 1. **Set Up Client**  
@@ -183,8 +167,6 @@ This is a simple interactive console chat. In real applications, you might imple
    - Continuously asks the user for input.
    - If input is “exit” or “quit,” break out of the loop.
    - Otherwise, call the `chat_with_api(...)` function and print out the returned text.
-
----
 
 ### Example Using the Official `openai` Library
 
@@ -229,8 +211,6 @@ while True:
     response = chat_with_api(user_input)
     print(f"Assistant: {response}")
 ```
-
----
 
 ## Key Takeaways
 
